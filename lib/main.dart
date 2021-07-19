@@ -13,6 +13,7 @@ void main() {
 
 class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
+    // provider for state management & api calling
     return MultiProvider(
       providers: [
         FutureProvider<BangladeshDataModel?>(
