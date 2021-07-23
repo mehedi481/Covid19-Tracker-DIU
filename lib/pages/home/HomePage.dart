@@ -281,6 +281,15 @@ class _HomePageState extends State<HomePage> {
                     },
                   ),
 
+                  // This is for Pie
+                  Consumer<WorldwideDataModel?>(
+                    builder: (context, worldDataPie, child) {
+                      return worldDataPie!.updated == null
+                          ? Center(child: CircularProgressIndicator())
+                          : PieChartWorldwide(worldwideDataModelPie: worldDataPie);
+                    },
+                  ),
+
                   // Padding(
                   //   padding:
                   //       const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
