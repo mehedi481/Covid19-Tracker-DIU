@@ -3,13 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class Worldwide extends StatelessWidget {
+  final WorldwideDataModel? worldwideDataModel;
+
+  const Worldwide({Key? key,@required this.worldwideDataModel}) : super(key: key);
   // final Map worldData;
 
   // Worldwide({required this.worldData});
 
   @override
   Widget build(BuildContext context) {
-    var _worldwideProvider = Provider.of<WorldwideDataModel?>(context);
     return GridView(
       shrinkWrap: true,
       physics: NeverScrollableScrollPhysics(),
@@ -23,28 +25,28 @@ class Worldwide extends StatelessWidget {
           textColor: Colors.red[800],
           title: "CONFIRMED",
           // count: worldData["cases"].toString(),
-          count: _worldwideProvider!.cases.toString(),
+          count: worldwideDataModel!.cases.toString(),
         ),
         StatusPannel(
           pannelColor: Colors.blue[100],
           textColor: Colors.blue[800],
           title: "ACTIVE",
           // count: worldData["active"].toString(),
-          count: _worldwideProvider.active.toString(),
+          count: worldwideDataModel!.active.toString(),
         ),
         StatusPannel(
           pannelColor: Colors.green[100],
           textColor: Colors.green[800],
           title: "RECOVERED",
           // count: worldData["recovered"].toString(),
-          count: _worldwideProvider.recovered.toString(),
+          count: worldwideDataModel!.recovered.toString(),
         ),
         StatusPannel(
           pannelColor: Colors.grey[400],
           textColor: Colors.grey[800],
           title: "DEATHS",
           // count: worldData["deaths"].toString(),
-          count: _worldwideProvider.deaths.toString(),
+          count: worldwideDataModel!.deaths.toString(),
         ),
       ],
     );

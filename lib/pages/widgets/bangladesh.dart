@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:covid_19_tracker/model/bangladesh_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -5,11 +7,15 @@ import 'package:provider/provider.dart';
 
 // ignore: must_be_immutable
 class Bangladesh extends StatelessWidget {
+  final BangladeshDataModel? bangladeshDataModel;
+ 
+
+  const Bangladesh({Key? key,@required this.bangladeshDataModel}) : super(key: key);
   // Map bangladeshData;
   // Bangladesh({required this.bangladeshData});
   @override
   Widget build(BuildContext context) {
-    var _bdDataProvider = Provider.of<BangladeshDataModel?>(context);
+    // var _bdDataProvider = Provider.of<BangladeshDataModel?>(context);
     return Container(
       padding:
           const EdgeInsets.only(left: 10.0, bottom: 10.0, right: 10.0, top: 5),
@@ -40,7 +46,7 @@ class Bangladesh extends StatelessWidget {
                   width: double.infinity,
                   child: Image.network(
                     // bangladeshData["countryInfo"]['flag'],
-                    _bdDataProvider!.countryInfo!.flag!,
+                    bangladeshDataModel!.countryInfo!.flag!,
                     height: 70,
                   ),
                 ),
@@ -57,7 +63,7 @@ class Bangladesh extends StatelessWidget {
               children: [
                 Text(
                   // "CONFIRMED : " + bangladeshData['cases'].toString(),
-                  "CONFIRMED " + _bdDataProvider.cases.toString(),
+                  "CONFIRMED " + bangladeshDataModel!.cases.toString(),
                   style: TextStyle(
                       fontSize: 13,
                       fontWeight: FontWeight.bold,
@@ -68,7 +74,7 @@ class Bangladesh extends StatelessWidget {
                 ),
                 Text(
                   // "ACTIVE : " + bangladeshData['active'].toString(),
-                  "ACTIVE : " + _bdDataProvider.active.toString(),
+                  "ACTIVE : " + bangladeshDataModel!.active.toString(),
                   style: TextStyle(
                       fontSize: 13,
                       fontWeight: FontWeight.bold,
@@ -79,7 +85,7 @@ class Bangladesh extends StatelessWidget {
                 ),
                 Text(
                   // "RECOVERED : " + bangladeshData['recovered'].toString(),
-                  "RECOVERED : " + _bdDataProvider.recovered.toString(),
+                  "RECOVERED : " + bangladeshDataModel!.recovered.toString(),
                   style: TextStyle(
                       fontSize: 13,
                       fontWeight: FontWeight.bold,
@@ -90,7 +96,7 @@ class Bangladesh extends StatelessWidget {
                 ),
                 Text(
                   // "TODAY DEATHS : " + bangladeshData['todayDeaths'].toString(),
-                  "TODAY DEATHS : " + _bdDataProvider.todayDeaths.toString(),
+                  "TODAY DEATHS : " + bangladeshDataModel!.todayDeaths.toString(),
                   style: TextStyle(
                       fontSize: 13,
                       fontWeight: FontWeight.bold,
@@ -101,7 +107,7 @@ class Bangladesh extends StatelessWidget {
                 ),
                 Text(
                   // "TOTAL DEATHS : " + bangladeshData['deaths'].toString(),
-                  "TOTAL DEATHS : " + _bdDataProvider.deaths.toString(),
+                  "TOTAL DEATHS : " + bangladeshDataModel!.deaths.toString(),
                   style: TextStyle(
                       fontSize: 13,
                       fontWeight: FontWeight.bold,

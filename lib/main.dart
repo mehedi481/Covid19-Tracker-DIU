@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
           catchError: (context,error){
             debugPrint("$error");
           },
-        )
+        ),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

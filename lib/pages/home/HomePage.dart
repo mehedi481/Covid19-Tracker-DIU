@@ -205,7 +205,9 @@ class _HomePageState extends State<HomePage> {
                     builder: (context, bdData, child) {
                       return bdData!.active == null
                           ? Center(child: CircularProgressIndicator())
-                          : Bangladesh();
+                          : Bangladesh(
+                              bangladeshDataModel: bdData,
+                            );
                     },
                   ),
                   Padding(
@@ -268,15 +270,17 @@ class _HomePageState extends State<HomePage> {
                   //           ],
                   //         ),
                   //       )
-                  //     : 
+                  //     :
                   Consumer<WorldwideDataModel?>(
                     builder: (context, worldData, child) {
                       return worldData!.updated == null
                           ? Center(child: CircularProgressIndicator())
-                          : Worldwide();
+                          : Worldwide(
+                              worldwideDataModel: worldData,
+                            );
                     },
                   ),
-                      
+
                   // Padding(
                   //   padding:
                   //       const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
@@ -295,10 +299,10 @@ class _HomePageState extends State<HomePage> {
                   //             ],
                   //           ),
                   //         )
-                  //       : 
-                        // PieChartWorldwide(
-                            
-                        //   ),
+                  //       :
+                  // PieChartWorldwide(
+
+                  //   ),
                   // ),
                   SizedBox(
                     height: 15,
