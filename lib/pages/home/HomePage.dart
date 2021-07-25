@@ -24,11 +24,11 @@ class _HomePageState extends State<HomePage> {
   // var worldWideUrl = Uri.parse("https://disease.sh/v3/covid-19/all");
   // var topCountryUrl =
   //     Uri.parse("https://disease.sh/v3/covid-19/countries?sort=cases");
-  var allCountryUrl = Uri.parse("https://disease.sh/v3/covid-19/countries");
-  late Map worldData;
+  // var allCountryUrl = Uri.parse("https://disease.sh/v3/covid-19/countries");
+  // late Map worldData;
   // late Map bangladesh;
-  late List topCountries;
-  late List allCountry;
+  // late List topCountries;
+  // late List allCountry;
   @override
   void initState() {
     super.initState();
@@ -40,7 +40,7 @@ class _HomePageState extends State<HomePage> {
     // fetchDataWorld();
     // fetchDataBangladesh();
     // fetchTopCountry();
-    fetchDataAllCountry();
+    // fetchDataAllCountry();
     await Future.delayed(Duration(seconds: 2));
   }
 
@@ -70,12 +70,12 @@ class _HomePageState extends State<HomePage> {
   //   });
   // }
 
-  Future fetchDataAllCountry() async {
-    http.Response response = await http.get(allCountryUrl);
-    setState(() {
-      allCountry = json.decode(response.body);
-    });
-  }
+  // Future fetchDataAllCountry() async {
+  //   http.Response response = await http.get(allCountryUrl);
+  //   setState(() {
+  //     allCountry = json.decode(response.body);
+  //   });
+  // }
 
   // Back Button Press Handling
   Future<bool> _onBackPressed() async {
@@ -164,9 +164,7 @@ class _HomePageState extends State<HomePage> {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => AllCountry(
-                                            allCountryData: allCountry,
-                                          )));
+                                      builder: (context) => AllCountry()));
                             },
                             child: Container(
                               padding: const EdgeInsets.all(3.5),

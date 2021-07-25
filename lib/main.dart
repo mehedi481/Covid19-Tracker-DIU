@@ -1,4 +1,5 @@
 import 'package:covid_19_tracker/api/api.dart';
+import 'package:covid_19_tracker/model/allCountries_model.dart';
 import 'package:covid_19_tracker/model/bangladesh_model.dart';
 import 'package:covid_19_tracker/model/topCountries_model.dart';
 import 'package:covid_19_tracker/pages/widgets/splash_screen.dart';
@@ -43,7 +44,18 @@ class MyApp extends StatelessWidget {
             );
           },
         ),
-      
+        FutureProvider<List<AllCountriesModel>?>(
+          initialData: null,
+          create: (context) => API.getAllCountriesData(),
+          catchError: (context, error) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text("$error"),
+                backgroundColor: Colors.red,
+              ),
+            );
+          },
+        ),
         FutureProvider<List<TopCountriesModel>?>(
           initialData: null,
           create: (context) => API.getTopCountriesData(),

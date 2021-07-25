@@ -1,29 +1,19 @@
+import 'package:covid_19_tracker/model/allCountries_model.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 // ignore: must_be_immutable
 class AllCountry extends StatelessWidget {
-  List allCountryData;
-  AllCountry({required this.allCountryData});
   @override
   Widget build(BuildContext context) {
+    var allCountryData = Provider.of<List<AllCountriesModel>?>(context);
     return Scaffold(
       appBar: AppBar(
         title: Text("All Countries"),
       ),
       body: allCountryData == null
           ? Center(
-              child: Column(
-                children: [
-                  CircularProgressIndicator(),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Text(
-                    "Please make sure your internet connection !",
-                    style: TextStyle(color: Colors.red[400]),
-                  ),
-                ],
-              ),
+              child: CircularProgressIndicator(),
             )
           : ListView.builder(
               itemCount: allCountryData.length,
@@ -47,7 +37,7 @@ class AllCountry extends StatelessWidget {
                             Container(
                               height: 20,
                               child: Text(
-                                allCountryData[index]["country"],
+                                allCountryData[index].country!,
                                 style: TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold,
@@ -61,7 +51,8 @@ class AllCountry extends StatelessWidget {
                               height: 75,
                               width: double.infinity,
                               child: Image.network(
-                                allCountryData[index]["countryInfo"]['flag'],
+                                // allCountryData[index]["countryInfo"]['flag'],
+                                allCountryData[index].countryInfo!.flag!,
                                 height: 70,
                               ),
                             ),
@@ -78,7 +69,8 @@ class AllCountry extends StatelessWidget {
                           children: [
                             Text(
                               "CONFIRMED : " +
-                                  allCountryData[index]['cases'].toString(),
+                                  // allCountryData[index]['cases'].toString(),
+                                  allCountryData[index].cases.toString(),
                               style: TextStyle(
                                 fontSize: 13,
                                 fontWeight: FontWeight.bold,
@@ -90,7 +82,8 @@ class AllCountry extends StatelessWidget {
                             ),
                             Text(
                               "ACTIVE : " +
-                                  allCountryData[index]['active'].toString(),
+                                  // allCountryData[index]['active'].toString(),
+                                  allCountryData[index].active.toString(),
                               style: TextStyle(
                                 fontSize: 13,
                                 fontWeight: FontWeight.bold,
@@ -102,7 +95,8 @@ class AllCountry extends StatelessWidget {
                             ),
                             Text(
                               "RECOVERED : " +
-                                  allCountryData[index]['recovered'].toString(),
+                                  // allCountryData[index]['recovered'].toString(),
+                                  allCountryData[index].recovered.toString(),
                               style: TextStyle(
                                 fontSize: 13,
                                 fontWeight: FontWeight.bold,
@@ -114,8 +108,8 @@ class AllCountry extends StatelessWidget {
                             ),
                             Text(
                               "TODAY DEATHS : " +
-                                  allCountryData[index]['todayDeaths']
-                                      .toString(),
+                                  // allCountryData[index]['todayDeaths'].toString(),
+                                  allCountryData[index].todayDeaths.toString(),
                               style: TextStyle(
                                 fontSize: 13,
                                 fontWeight: FontWeight.bold,
@@ -127,7 +121,8 @@ class AllCountry extends StatelessWidget {
                             ),
                             Text(
                               "TOTAL DEATHS : " +
-                                  allCountryData[index]['deaths'].toString(),
+                                  // allCountryData[index]['deaths'].toString(),
+                                  allCountryData[index].deaths.toString(),
                               style: TextStyle(
                                 fontSize: 13,
                                 fontWeight: FontWeight.bold,

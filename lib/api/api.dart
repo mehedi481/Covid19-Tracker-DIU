@@ -1,3 +1,4 @@
+import 'package:covid_19_tracker/model/allCountries_model.dart';
 import 'package:covid_19_tracker/model/bangladesh_model.dart';
 import 'package:covid_19_tracker/model/topCountries_model.dart';
 import 'package:covid_19_tracker/model/worldWide_model.dart';
@@ -39,6 +40,23 @@ class API {
     }
   }
 
+  /////////////////// All Countries //////////////////////
+  static Future<List<AllCountriesModel>?> getAllCountriesData() async {
+    var request = http.Request(
+        'GET', Uri.parse('https://disease.sh/v3/covid-19/countries'));
+
+    http.StreamedResponse response = await request.send();
+
+    if (response.statusCode == 200) {
+      var body = await response.stream.bytesToString();
+      print("All List of Country");
+      print(body);
+      var allListCountries = allCountriesModelFromJson(body);
+      return allListCountries; 
+    } else {
+      print(response.reasonPhrase);
+    }
+  }
 
   ///////////////////// Top Countries /////////////////////
   static Future<List<TopCountriesModel>?> getTopCountriesData() async {
@@ -48,7 +66,7 @@ class API {
     http.StreamedResponse response = await request.send();
 
     if (response.statusCode == 200) {
-      var body  = await response.stream.bytesToString();
+      var body = await response.stream.bytesToString();
       print("Top Countries Data");
       print(body);
       var topCountriesData = topCountriesModelFromJson(body);
