@@ -1,29 +1,19 @@
+import 'package:covid_19_tracker/model/topCountries_model.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 // ignore: must_be_immutable
 class TopList extends StatelessWidget {
-  List topListData;
-  TopList({required this.topListData});
   @override
   Widget build(BuildContext context) {
+    var topListData = Provider.of<List<TopCountriesModel>?>(context);
     return Scaffold(
       appBar: AppBar(
         title: Text("Top 10 Effected Countries"),
       ),
       body: topListData == null
           ? Center(
-              child: Column(
-                children: [
-                  CircularProgressIndicator(),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Text(
-                    "Please make sure your internet connection !",
-                    style: TextStyle(color: Colors.red[400]),
-                  ),
-                ],
-              ),
+              child: CircularProgressIndicator(),
             )
           : ListView.builder(
               itemCount: 10,
@@ -47,7 +37,8 @@ class TopList extends StatelessWidget {
                             Container(
                               height: 20,
                               child: Text(
-                                topListData[index]["country"],
+                                // topListData[index]["country"],
+                                topListData[index].country!,
                                 style: TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold,
@@ -61,7 +52,8 @@ class TopList extends StatelessWidget {
                               height: 75,
                               width: double.infinity,
                               child: Image.network(
-                                topListData[index]["countryInfo"]['flag'],
+                                // topListData[index]["countryInfo"]['flag'],
+                                topListData[index].countryInfo!.flag!,
                                 height: 70,
                               ),
                             ),
@@ -78,7 +70,8 @@ class TopList extends StatelessWidget {
                           children: [
                             Text(
                               "CONFIRMED : " +
-                                  topListData[index]['cases'].toString(),
+                                  // topListData[index]['cases'].toString(),
+                                  topListData[index].cases.toString(),
                               style: TextStyle(
                                 fontSize: 13,
                                 fontWeight: FontWeight.bold,
@@ -90,7 +83,8 @@ class TopList extends StatelessWidget {
                             ),
                             Text(
                               "ACTIVE : " +
-                                  topListData[index]['active'].toString(),
+                                  // topListData[index]['active'].toString(),
+                                  topListData[index].active.toString(),
                               style: TextStyle(
                                 fontSize: 13,
                                 fontWeight: FontWeight.bold,
@@ -102,7 +96,8 @@ class TopList extends StatelessWidget {
                             ),
                             Text(
                               "RECOVERED : " +
-                                  topListData[index]['recovered'].toString(),
+                                  // topListData[index]['recovered'].toString(),
+                                  topListData[index].recovered.toString(),
                               style: TextStyle(
                                 fontSize: 13,
                                 fontWeight: FontWeight.bold,
@@ -114,7 +109,8 @@ class TopList extends StatelessWidget {
                             ),
                             Text(
                               "TODAY DEATHS : " +
-                                  topListData[index]['todayDeaths'].toString(),
+                                  // topListData[index]['todayDeaths'].toString(),
+                                  topListData[index].todayDeaths.toString(),
                               style: TextStyle(
                                 fontSize: 13,
                                 fontWeight: FontWeight.bold,
@@ -126,7 +122,8 @@ class TopList extends StatelessWidget {
                             ),
                             Text(
                               "TOTAL DEATHS : " +
-                                  topListData[index]['deaths'].toString(),
+                                  // topListData[index]['deaths'].toString(),
+                                 topListData[index].deaths.toString(),
                               style: TextStyle(
                                 fontSize: 13,
                                 fontWeight: FontWeight.bold,

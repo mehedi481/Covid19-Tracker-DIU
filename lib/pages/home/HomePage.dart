@@ -22,8 +22,8 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   // var worldWideUrl = Uri.parse("https://disease.sh/v3/covid-19/all");
-  var topCountryUrl =
-      Uri.parse("https://disease.sh/v3/covid-19/countries?sort=cases");
+  // var topCountryUrl =
+  //     Uri.parse("https://disease.sh/v3/covid-19/countries?sort=cases");
   var allCountryUrl = Uri.parse("https://disease.sh/v3/covid-19/countries");
   late Map worldData;
   // late Map bangladesh;
@@ -39,7 +39,7 @@ class _HomePageState extends State<HomePage> {
   Future fetchData() async {
     // fetchDataWorld();
     // fetchDataBangladesh();
-    fetchTopCountry();
+    // fetchTopCountry();
     fetchDataAllCountry();
     await Future.delayed(Duration(seconds: 2));
   }
@@ -63,12 +63,12 @@ class _HomePageState extends State<HomePage> {
   //   });
   // }
 
-  Future fetchTopCountry() async {
-    http.Response response = await http.get(topCountryUrl);
-    setState(() {
-      topCountries = json.decode(response.body);
-    });
-  }
+  // Future fetchTopCountry() async {
+  //   http.Response response = await http.get(topCountryUrl);
+  //   setState(() {
+  //     topCountries = json.decode(response.body);
+  //   });
+  // }
 
   Future fetchDataAllCountry() async {
     http.Response response = await http.get(allCountryUrl);
@@ -231,7 +231,6 @@ class _HomePageState extends State<HomePage> {
                               context,
                               MaterialPageRoute(
                                 builder: (context) => TopList(
-                                  topListData: topCountries,
                                 ),
                               ),
                             );
@@ -280,13 +279,16 @@ class _HomePageState extends State<HomePage> {
                             );
                     },
                   ),
-
+                  SizedBox(
+                    height: 10,
+                  ),
                   // This is for Pie
                   Consumer<WorldwideDataModel?>(
                     builder: (context, worldDataPie, child) {
                       return worldDataPie!.updated == null
                           ? Center(child: CircularProgressIndicator())
-                          : PieChartWorldwide(worldwideDataModelPie: worldDataPie);
+                          : PieChartWorldwide(
+                              worldwideDataModelPie: worldDataPie);
                     },
                   ),
 
