@@ -1,4 +1,3 @@
-import 'package:covid_19_tracker/api/api.dart';
 import 'package:covid_19_tracker/data/data_source.dart';
 import 'package:covid_19_tracker/model/bangladesh_model.dart';
 import 'package:covid_19_tracker/model/worldWide_model.dart';
@@ -10,9 +9,6 @@ import 'package:covid_19_tracker/pages/widgets/pie_Chart_worldwide.dart';
 import 'package:covid_19_tracker/pages/widgets/top_list.dart';
 import 'package:covid_19_tracker/pages/widgets/worldwide.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
-
 import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
@@ -21,14 +17,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  // var worldWideUrl = Uri.parse("https://disease.sh/v3/covid-19/all");
-  // var topCountryUrl =
-  //     Uri.parse("https://disease.sh/v3/covid-19/countries?sort=cases");
-  // var allCountryUrl = Uri.parse("https://disease.sh/v3/covid-19/countries");
-  // late Map worldData;
-  // late Map bangladesh;
-  // late List topCountries;
-  // late List allCountry;
   @override
   void initState() {
     super.initState();
@@ -37,45 +25,8 @@ class _HomePageState extends State<HomePage> {
 
   // Pull to Refresh function
   Future fetchData() async {
-    // fetchDataWorld();
-    // fetchDataBangladesh();
-    // fetchTopCountry();
-    // fetchDataAllCountry();
     await Future.delayed(Duration(seconds: 2));
   }
-
-  // Future fetchDataWorld() async {
-  //   try {
-  //     http.Response response = await http.get(worldWideUrl);
-  //     setState(() {
-  //       worldData = json.decode(response.body);
-  //     });
-  //   } catch (e) {
-  //     print(e);
-  //   }
-  // }
-
-  // Future fetchDataBangladesh() async {
-  //   http.Response response =
-  //       await http.get(bangladeshUrl);
-  //   setState(() {
-  //     bangladesh = json.decode(response.body);
-  //   });
-  // }
-
-  // Future fetchTopCountry() async {
-  //   http.Response response = await http.get(topCountryUrl);
-  //   setState(() {
-  //     topCountries = json.decode(response.body);
-  //   });
-  // }
-
-  // Future fetchDataAllCountry() async {
-  //   http.Response response = await http.get(allCountryUrl);
-  //   setState(() {
-  //     allCountry = json.decode(response.body);
-  //   });
-  // }
 
   // Back Button Press Handling
   Future<bool> _onBackPressed() async {
@@ -183,22 +134,7 @@ class _HomePageState extends State<HomePage> {
                           ),
                         ]),
                   ),
-                  // bangladesh == null
-                  //     ? Center(
-                  //         child: Column(
-                  //           children: [
-                  //             CircularProgressIndicator(),
-                  //             SizedBox(
-                  //               height: 10,
-                  //             ),
-                  //             Text(
-                  //               "Please make sure your internet connection !\nPull to Refresh",
-                  //               style: TextStyle(color: Colors.red[400]),
-                  //             ),
-                  //           ],
-                  //         ),
-                  //       )
-                  //     :
+
                   Consumer<BangladeshDataModel?>(
                     builder: (context, bdData, child) {
                       return bdData!.active == null
@@ -228,8 +164,7 @@ class _HomePageState extends State<HomePage> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => TopList(
-                                ),
+                                builder: (context) => TopList(),
                               ),
                             );
                           },
@@ -251,23 +186,7 @@ class _HomePageState extends State<HomePage> {
                       ],
                     ),
                   ),
-                  // World Wide page
-                  // worldData == null
-                  //     ? Center(
-                  //         child: Column(
-                  //           children: [
-                  //             CircularProgressIndicator(),
-                  //             SizedBox(
-                  //               height: 10,
-                  //             ),
-                  //             Text(
-                  //               "Please make sure your internet connection !\nPull to Refresh",
-                  //               style: TextStyle(color: Colors.red[400]),
-                  //             ),
-                  //           ],
-                  //         ),
-                  //       )
-                  //     :
+
                   Consumer<WorldwideDataModel?>(
                     builder: (context, worldData, child) {
                       return worldData!.updated == null
@@ -290,29 +209,6 @@ class _HomePageState extends State<HomePage> {
                     },
                   ),
 
-                  // Padding(
-                  //   padding:
-                  //       const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
-                  //   child: worldData == null
-                  //       ? Center(
-                  //           child: Column(
-                  //             children: [
-                  //               CircularProgressIndicator(),
-                  //               SizedBox(
-                  //                 height: 10,
-                  //               ),
-                  //               Text(
-                  //                 "Please make sure your internet connection !\nPull to Refresh",
-                  //                 style: TextStyle(color: Colors.red[400]),
-                  //               ),
-                  //             ],
-                  //           ),
-                  //         )
-                  //       :
-                  // PieChartWorldwide(
-
-                  //   ),
-                  // ),
                   SizedBox(
                     height: 15,
                   ),

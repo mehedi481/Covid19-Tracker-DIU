@@ -3,14 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class AboutMe extends StatelessWidget {
-  void _launchURL(url)async{
-    if(await canLaunch(url)){
+  void _launchURL(url) async {
+    if (await canLaunch(url)) {
       await launch(url);
-    }
-    else{
+    } else {
       print("Url launch Problem");
     }
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,16 +46,21 @@ class AboutMe extends StatelessWidget {
               height: 6,
             ),
             ElevatedButton(
-              style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all<Color>(primaryBlack),
-              ),
-              onPressed: (){
-                _launchURL(
-                  "mailto:mehedihasan.cse.info@gmail.com?subject=From Covid-19 App&body=");
-              }, child: Text("Contact With Us",style: TextStyle(
-              color: Colors.white,
-              fontSize: 14,
-            ),)),
+                style: ButtonStyle(
+                  backgroundColor:
+                      MaterialStateProperty.all<Color>(primaryBlack),
+                ),
+                onPressed: () {
+                  _launchURL(
+                      "mailto:mehedihasan.cse.info@gmail.com?subject=From Covid-19 App&body=");
+                },
+                child: Text(
+                  "Contact With Us",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 14,
+                  ),
+                )),
           ],
         ),
       ),

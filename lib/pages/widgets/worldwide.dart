@@ -1,15 +1,11 @@
 import 'package:covid_19_tracker/model/worldWide_model.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class Worldwide extends StatelessWidget {
   final WorldwideDataModel? worldwideDataModel;
 
-  const Worldwide({Key? key,@required this.worldwideDataModel}) : super(key: key);
-  // final Map worldData;
-
-  // Worldwide({required this.worldData});
-
+  const Worldwide({Key? key, @required this.worldwideDataModel})
+      : super(key: key);
   @override
   Widget build(BuildContext context) {
     return GridView(
@@ -24,28 +20,24 @@ class Worldwide extends StatelessWidget {
           pannelColor: Colors.red[100],
           textColor: Colors.red[800],
           title: "CONFIRMED",
-          // count: worldData["cases"].toString(),
           count: worldwideDataModel!.cases.toString(),
         ),
         StatusPannel(
           pannelColor: Colors.blue[100],
           textColor: Colors.blue[800],
           title: "ACTIVE",
-          // count: worldData["active"].toString(),
           count: worldwideDataModel!.active.toString(),
         ),
         StatusPannel(
           pannelColor: Colors.green[100],
           textColor: Colors.green[800],
           title: "RECOVERED",
-          // count: worldData["recovered"].toString(),
           count: worldwideDataModel!.recovered.toString(),
         ),
         StatusPannel(
           pannelColor: Colors.grey[400],
           textColor: Colors.grey[800],
           title: "DEATHS",
-          // count: worldData["deaths"].toString(),
           count: worldwideDataModel!.deaths.toString(),
         ),
       ],
@@ -59,7 +51,10 @@ class StatusPannel extends StatelessWidget {
   final String title;
   final String count;
   const StatusPannel(
-      {required this.count, this.pannelColor, this.textColor, required this.title});
+      {required this.count,
+      this.pannelColor,
+      this.textColor,
+      required this.title});
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
@@ -68,9 +63,7 @@ class StatusPannel extends StatelessWidget {
       height: 80,
       width: width / 2,
       decoration: BoxDecoration(
-        color: pannelColor,
-        borderRadius: BorderRadius.circular(8.0)
-      ),
+          color: pannelColor, borderRadius: BorderRadius.circular(8.0)),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [

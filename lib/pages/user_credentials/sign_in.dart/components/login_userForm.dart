@@ -8,7 +8,6 @@ class LoginUserForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-  
     return Form(
       child: SingleChildScrollView(
         child: Container(
@@ -27,7 +26,6 @@ class LoginUserForm extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 35),
-              
               SizedBox(height: 25),
               TextFormField(
                 decoration: InputDecoration(
@@ -37,7 +35,6 @@ class LoginUserForm extends StatelessWidget {
               ),
               SizedBox(height: 25),
               TextFormField(
-               
                 decoration: InputDecoration(
                   prefixIcon: Icon(Icons.lock),
                   hintText: "Enter your Password",
@@ -65,20 +62,22 @@ class LoginUserForm extends StatelessWidget {
                         child: Text(
                           "Login",
                           style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              letterSpacing: 1.5,
-                              fontFamily: "roboto",),
+                            fontWeight: FontWeight.bold,
+                            letterSpacing: 1.5,
+                            fontFamily: "roboto",
+                          ),
                         ),
                       ),
                     ),
                   ),
-                  SizedBox(height:20),
+                  SizedBox(height: 20),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
                         "Don't have an account ?",
-                        style: TextStyle(fontSize: 14,fontWeight: FontWeight.bold),
+                        style: TextStyle(
+                            fontSize: 14, fontWeight: FontWeight.bold),
                       ),
                       SizedBox(width: 10),
                       InkWell(
@@ -86,10 +85,9 @@ class LoginUserForm extends StatelessWidget {
                         child: Text(
                           "Register",
                           style: TextStyle(
-                            color: Colors.blue,
-                            fontSize: 14,
-                            fontWeight: FontWeight.bold
-                          ),
+                              color: Colors.blue,
+                              fontSize: 14,
+                              fontWeight: FontWeight.bold),
                         ),
                       )
                     ],

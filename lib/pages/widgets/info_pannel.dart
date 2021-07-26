@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 
 import 'faqs_page.dart';
 
-
 class InfoPannel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

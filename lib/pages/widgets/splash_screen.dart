@@ -30,7 +30,9 @@ class _SplashScreenState extends State<SplashScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Container(
-              child: FlutterLogo(),height: 100,width: 100,
+              child: FlutterLogo(),
+              height: 100,
+              width: 100,
             ),
             SizedBox(
               height: 5,

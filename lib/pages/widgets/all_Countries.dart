@@ -51,7 +51,6 @@ class AllCountry extends StatelessWidget {
                               height: 75,
                               width: double.infinity,
                               child: Image.network(
-                                // allCountryData[index]["countryInfo"]['flag'],
                                 allCountryData[index].countryInfo!.flag!,
                                 height: 70,
                               ),
@@ -69,7 +68,6 @@ class AllCountry extends StatelessWidget {
                           children: [
                             Text(
                               "CONFIRMED : " +
-                                  // allCountryData[index]['cases'].toString(),
                                   allCountryData[index].cases.toString(),
                               style: TextStyle(
                                 fontSize: 13,
@@ -82,7 +80,6 @@ class AllCountry extends StatelessWidget {
                             ),
                             Text(
                               "ACTIVE : " +
-                                  // allCountryData[index]['active'].toString(),
                                   allCountryData[index].active.toString(),
                               style: TextStyle(
                                 fontSize: 13,
@@ -95,7 +92,6 @@ class AllCountry extends StatelessWidget {
                             ),
                             Text(
                               "RECOVERED : " +
-                                  // allCountryData[index]['recovered'].toString(),
                                   allCountryData[index].recovered.toString(),
                               style: TextStyle(
                                 fontSize: 13,
@@ -108,7 +104,6 @@ class AllCountry extends StatelessWidget {
                             ),
                             Text(
                               "TODAY DEATHS : " +
-                                  // allCountryData[index]['todayDeaths'].toString(),
                                   allCountryData[index].todayDeaths.toString(),
                               style: TextStyle(
                                 fontSize: 13,
@@ -121,7 +116,6 @@ class AllCountry extends StatelessWidget {
                             ),
                             Text(
                               "TOTAL DEATHS : " +
-                                  // allCountryData[index]['deaths'].toString(),
                                   allCountryData[index].deaths.toString(),
                               style: TextStyle(
                                 fontSize: 13,

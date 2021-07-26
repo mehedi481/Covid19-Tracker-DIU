@@ -75,13 +75,14 @@ class UserForm extends StatelessWidget {
                       ),
                     ),
                   ),
-                  SizedBox(height:20),
+                  SizedBox(height: 20),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
                         "Already have ?",
-                        style: TextStyle(fontSize: 14,fontWeight: FontWeight.bold),
+                        style: TextStyle(
+                            fontSize: 14, fontWeight: FontWeight.bold),
                       ),
                       SizedBox(width: 10),
                       InkWell(
@@ -89,10 +90,9 @@ class UserForm extends StatelessWidget {
                         child: Text(
                           "Login",
                           style: TextStyle(
-                            color: Colors.blue,
-                            fontSize: 14,
-                            fontWeight: FontWeight.bold
-                          ),
+                              color: Colors.blue,
+                              fontSize: 14,
+                              fontWeight: FontWeight.bold),
                         ),
                       )
                     ],

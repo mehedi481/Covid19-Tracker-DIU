@@ -6,9 +6,8 @@ import 'package:pie_chart/pie_chart.dart';
 class PieChartWorldwide extends StatelessWidget {
   final WorldwideDataModel? worldwideDataModelPie;
 
-  const PieChartWorldwide({Key? key,@required this.worldwideDataModelPie}) : super(key: key);
-  // Map worldwideDataModelPie;
-  // PieChartWorldwide({required this.worldwideDataModelPie});
+  const PieChartWorldwide({Key? key, @required this.worldwideDataModelPie})
+      : super(key: key);
   @override
   Widget build(BuildContext context) {
     Map<String, double> mapData = {
