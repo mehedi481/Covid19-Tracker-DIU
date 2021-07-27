@@ -1,5 +1,6 @@
 import 'dart:ui';
 import 'package:covid_19_tracker/components/image_path.dart';
+import 'package:covid_19_tracker/data/data_source.dart';
 import 'package:covid_19_tracker/helpers/keyboard/keyboard.dart';
 import 'package:covid_19_tracker/helpers/size_config/size_config.dart';
 import 'package:flutter/material.dart';
@@ -11,6 +12,7 @@ class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: primaryBlack,
       extendBodyBehindAppBar: true,
       body: SafeArea(
         child: GestureDetector(

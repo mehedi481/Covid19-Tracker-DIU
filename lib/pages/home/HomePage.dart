@@ -61,6 +61,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: Text("COVID-19 TRACKER"),
         centerTitle: false,
         actions: [

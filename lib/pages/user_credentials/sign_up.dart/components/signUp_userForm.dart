@@ -1,4 +1,5 @@
 import 'package:covid_19_tracker/helpers/size_config/size_config.dart';
+import 'package:covid_19_tracker/pages/user_credentials/sign_in.dart/log_in_page.dart';
 import 'package:flutter/material.dart';
 
 class UserForm extends StatelessWidget {
@@ -86,7 +87,9 @@ class UserForm extends StatelessWidget {
                       ),
                       SizedBox(width: 10),
                       InkWell(
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.pushReplacement(context,MaterialPageRoute(builder: (context)=>LoginPage()));
+                        },
                         child: Text(
                           "Login",
                           style: TextStyle(
