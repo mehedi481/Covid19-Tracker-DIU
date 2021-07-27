@@ -1,3 +1,4 @@
+import 'package:covid_19_tracker/api/api.dart';
 import 'package:covid_19_tracker/data/data_source.dart';
 import 'package:covid_19_tracker/model/bangladesh_model.dart';
 import 'package:covid_19_tracker/model/worldWide_model.dart';
@@ -24,7 +25,11 @@ class _HomePageState extends State<HomePage> {
   }
 
   // Pull to Refresh function
-  Future fetchData() async {
+  Future<void> fetchData() async {
+    API.getBangladeshData();
+    API.getTopCountriesData();
+    API.getWorldWideData();
+    API.getAllCountriesData();
     await Future.delayed(Duration(seconds: 2));
   }
 
@@ -144,6 +149,7 @@ class _HomePageState extends State<HomePage> {
                             );
                     },
                   ),
+                 
                   Padding(
                     padding: const EdgeInsets.symmetric(
                       vertical: 10,

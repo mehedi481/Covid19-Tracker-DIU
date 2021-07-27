@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:covid_19_tracker/components/image_path.dart';
 import 'package:covid_19_tracker/data/data_source.dart';
 import 'package:covid_19_tracker/pages/wrapper.dart';
 import 'package:flutter/material.dart';
@@ -30,7 +31,7 @@ class _SplashScreenState extends State<SplashScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Container(
-              child: FlutterLogo(),
+              child: Image.asset(ImagePath.logo),
               height: 100,
               width: 100,
             ),
