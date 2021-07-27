@@ -69,10 +69,10 @@ class WelcomePage extends StatelessWidget {
                         textColor: Colors.white,
                         onPressed: () {
                           Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => LoginPage(),
-                            ));
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => LoginPage(),
+                              ));
                         },
                       ),
                       SizedBox(height: 10),
@@ -98,17 +98,17 @@ class WelcomePage extends StatelessWidget {
             Flexible(
                 flex: 1,
                 child: InkWell(
-                  onTap: (){
-                    Navigator.push(context, MaterialPageRoute(builder: (context)=>HomePage()));
+                  onTap: () {
+                    Navigator.pushReplacement(context,
+                        MaterialPageRoute(builder: (context) => HomePage()));
                   },
-                                  child: Text(
+                  child: Text(
                     "Skip this Page",
                     style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.w500,
-                      fontSize: getProportionateScreenWidth(18),
-                      decoration: TextDecoration.underline
-                    ),
+                        color: Colors.white,
+                        fontWeight: FontWeight.w500,
+                        fontSize: getProportionateScreenWidth(18),
+                        decoration: TextDecoration.underline),
                   ),
                 ))
           ],
