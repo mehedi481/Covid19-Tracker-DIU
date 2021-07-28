@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
       providers: [
         //Check Connection Status
         StreamProvider<ConnectivityResult?>(
-          initialData: null,
+          initialData: ConnectivityResult.none,
           create: (BuildContext context) => Connectivity().onConnectivityChanged,
         ),
         FutureProvider<BangladeshDataModel?>(
