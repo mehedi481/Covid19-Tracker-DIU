@@ -1,3 +1,4 @@
+import 'package:connectivity/connectivity.dart';
 import 'package:covid_19_tracker/components/image_path.dart';
 import 'package:covid_19_tracker/data/data_source.dart';
 import 'package:covid_19_tracker/helpers/size_config/size_config.dart';
@@ -5,12 +6,19 @@ import 'package:covid_19_tracker/pages/home/HomePage.dart';
 import 'package:covid_19_tracker/pages/user_credentials/sign_in.dart/log_in_page.dart';
 import 'package:covid_19_tracker/pages/user_credentials/sign_up.dart/sign_up_page.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-class WelcomePage extends StatelessWidget {
-  const WelcomePage({Key? key}) : super(key: key);
+class WelcomePage extends StatefulWidget {
+  @override
+  _WelcomePageState createState() => _WelcomePageState();
+}
+
+class _WelcomePageState extends State<WelcomePage> {
+  var connectionStatus;
 
   @override
   Widget build(BuildContext context) {
+    connectionStatus = Provider.of<ConnectivityResult?>(context);
     return Scaffold(
       backgroundColor: primaryBlack,
       body: SafeArea(
@@ -89,6 +97,26 @@ class WelcomePage extends StatelessWidget {
                           );
                         },
                       ),
+                      MaterialButton(
+                        onPressed: () {
+                          if (connectionStatus == ConnectivityResult.wifi ||
+                              connectionStatus == ConnectivityResult.mobile) {
+                            ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                              content: Text("You are Online"),
+                            ));
+                          } else {
+                            ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                              content: Text("You are Offline"),
+                            ));
+                          }
+                        },
+                        child: Text(
+                          "Connect Check",
+                          style: TextStyle(color: Colors.red),
+                        ),
+                      )
                     ],
                   ),
                 ),
@@ -97,19 +125,34 @@ class WelcomePage extends StatelessWidget {
             Spacer(),
             Flexible(
                 flex: 1,
-                child: InkWell(
-                  onTap: () {
-                    Navigator.pushReplacement(context,
-                        MaterialPageRoute(builder: (context) => HomePage()));
+                child: Consumer<ConnectivityResult?>(
+                  builder: (context, result, child) {
+                    return result != ConnectivityResult.none
+                        ? InkWell(
+                            onTap: () {
+                              Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => HomePage()));
+                            },
+                            child: Text(
+                              "Skip this Page",
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: getProportionateScreenWidth(18),
+                                  decoration: TextDecoration.underline),
+                            ),
+                          )
+                        : Text(
+                            "You are Offline",
+                            style: TextStyle(
+                              color: Colors.red,
+                              fontSize: 20,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          );
                   },
-                  child: Text(
-                    "Skip this Page",
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.w500,
-                        fontSize: getProportionateScreenWidth(18),
-                        decoration: TextDecoration.underline),
-                  ),
                 ))
           ],
         ),

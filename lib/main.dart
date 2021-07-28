@@ -19,9 +19,10 @@ class MyApp extends StatelessWidget {
     // provider for state management & api calling
     return MultiProvider(
       providers: [
+        //Check Connection Status
         StreamProvider<ConnectivityResult?>(
           initialData: null,
-          create: (context) => Connectivity().onConnectivityChanged,
+          create: (BuildContext context) => Connectivity().onConnectivityChanged,
         ),
         FutureProvider<BangladeshDataModel?>(
           initialData: BangladeshDataModel(),
