@@ -23,14 +23,15 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  connectivity: ^3.0.6
   cupertino_icons: ^1.0.0
+  google_fonts: ^2.1.0
   http: ^0.13.1
+  intl: null
   pie_chart: null
   provider: ^5.0.0
   shared_preferences: null
   url_launcher: null
-  intl:
-  google_fonts: ^2.1.0
 
 dev_dependencies:
   flutter_test:

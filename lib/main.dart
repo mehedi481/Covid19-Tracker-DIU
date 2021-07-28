@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'data/data_source.dart';
 import 'model/worldWide_model.dart';
+import 'package:connectivity/connectivity.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -18,6 +19,10 @@ class MyApp extends StatelessWidget {
     // provider for state management & api calling
     return MultiProvider(
       providers: [
+        StreamProvider<ConnectivityResult?>(
+          initialData: null,
+          create: (context) => Connectivity().onConnectivityChanged,
+        ),
         FutureProvider<BangladeshDataModel?>(
           initialData: BangladeshDataModel(),
           create: (context) => API.getBangladeshData(),
