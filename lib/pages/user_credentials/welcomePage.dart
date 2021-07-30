@@ -14,15 +14,11 @@ class WelcomePage extends StatefulWidget {
 }
 
 class _WelcomePageState extends State<WelcomePage> {
-  // var connectionStatus;
-  @override
-  void initState() {
-    super.initState();
-  }
+  var connectionStatus;
 
   @override
   Widget build(BuildContext context) {
-    // connectionStatus = Provider.of<ConnectivityResult?>(context);
+    connectionStatus = Provider.of<ConnectivityResult?>(context);
     return Scaffold(
       backgroundColor: primaryBlack,
       body: SafeArea(
@@ -80,11 +76,22 @@ class _WelcomePageState extends State<WelcomePage> {
                         bgColor: Colors.green,
                         textColor: Colors.white,
                         onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => LoginPage(),
-                              ));
+                          if (connectionStatus != ConnectivityResult.none) {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => LoginPage(),
+                                ));
+                          } else {
+                            ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                              content: Text(
+                                "You are Offline.Please make sure your internet Connection.",
+                                style: TextStyle(fontSize: 15),
+                              ),
+                              backgroundColor: Colors.red,
+                            ));
+                          }
                         },
                       ),
                       SizedBox(height: 10),
@@ -93,34 +100,25 @@ class _WelcomePageState extends State<WelcomePage> {
                         bgColor: Colors.white,
                         textColor: Colors.green,
                         onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => SignUpPage(),
-                            ),
-                          );
+                          if (connectionStatus != ConnectivityResult.none) {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => SignUpPage(),
+                              ),
+                            );
+                          } else {
+                            ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                              content: Text(
+                                "You are Offline.Please make sure your internet Connection.",
+                                style: TextStyle(fontSize: 15),
+                              ),
+                              backgroundColor: Colors.red,
+                            ));
+                          }
                         },
                       ),
-                      // MaterialButton(
-                      //   onPressed: () {
-                      //     if (connectionStatus == ConnectivityResult.wifi ||
-                      //         connectionStatus == ConnectivityResult.mobile) {
-                      //       ScaffoldMessenger.of(context).hideCurrentSnackBar();
-                      //       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                      //         content: Text("You are Online"),
-                      //       ));
-                      //     } else {
-                      //       ScaffoldMessenger.of(context).hideCurrentSnackBar();
-                      //       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                      //         content: Text("You are Offline"),
-                      //       ));
-                      //     }
-                      //   },
-                      // child: Text(
-                      //   "Connect Check",
-                      //   style: TextStyle(color: Colors.red),
-                      // ),
-                      // )
                     ],
                   ),
                 ),
@@ -129,37 +127,33 @@ class _WelcomePageState extends State<WelcomePage> {
             Spacer(),
             Flexible(
               flex: 1,
-              child: Consumer<ConnectivityResult?>(
-                builder: (context, result, child) {
-                  return result != ConnectivityResult.none
-                      ? InkWell(
-                          onTap: () {
-                            Navigator.pushReplacement(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => HomePage(),
-                              ),
-                            );
-                          },
-                          child: Text(
-                            "Skip this Page",
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.w500,
-                                fontSize: getProportionateScreenWidth(18),
-                                decoration: TextDecoration.underline),
-                          ),
-                        )
-                      : Text(
-                          "You are Offline",
-                          style: TextStyle(
-                            color: Colors.red,
-                            fontSize: 20,
-                            fontWeight: FontWeight.w600,
+              child: connectionStatus != ConnectivityResult.none
+                  ? InkWell(
+                      onTap: () {
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => HomePage(),
                           ),
                         );
-                },
-              ),
+                      },
+                      child: Text(
+                        "Skip this Page",
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w500,
+                            fontSize: getProportionateScreenWidth(18),
+                            decoration: TextDecoration.underline),
+                      ),
+                    )
+                  : Text(
+                      "You are Offline",
+                      style: TextStyle(
+                        color: Colors.red,
+                        fontSize: 20,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
             ),
           ],
         ),
