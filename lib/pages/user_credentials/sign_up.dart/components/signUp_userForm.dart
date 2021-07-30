@@ -1,15 +1,38 @@
+import 'package:covid_19_tracker/helpers/constants/constants.dart';
 import 'package:covid_19_tracker/helpers/size_config/size_config.dart';
 import 'package:covid_19_tracker/pages/user_credentials/sign_in.dart/log_in_page.dart';
 import 'package:flutter/material.dart';
 
-class UserForm extends StatelessWidget {
-  const UserForm({
-    Key? key,
-  }) : super(key: key);
+//ignore: must_be_immutable
+class SignUpUserForm extends StatelessWidget {
+  SignUpUserForm({Key? key, @required this.formKey}) : super(key: key);
+  final formKey;
+  String _name = '';
+  String _password = '';
+  String _email = '';
+
+  void validateFormField() {
+    final form = formKey.currentState;
+    if (form!.validate()) {
+      print("Form valid");
+      print(_name + _email + _password);
+    } else {
+      print("Form Invalid");
+    }
+  }
+
+  String? validateEmail(String email) {
+    if (!emailPhoneValidatorRegExp.hasMatch(email)) {
+      return "Enter a valid email address";
+    } else {
+      return null;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Form(
+      key: formKey,
       child: SingleChildScrollView(
         child: Container(
           margin: const EdgeInsets.all(10.0),
@@ -32,6 +55,10 @@ class UserForm extends StatelessWidget {
                   prefixIcon: Icon(Icons.person),
                   hintText: "Enter your FullName",
                 ),
+                validator: (value) => value!.isEmpty ? "Name Required" : null,
+                onChanged: (value) {
+                  _name = value;
+                },
               ),
               SizedBox(height: 25),
               TextFormField(
@@ -39,6 +66,10 @@ class UserForm extends StatelessWidget {
                   prefixIcon: Icon(Icons.email),
                   hintText: "Enter your Email",
                 ),
+                validator: (value) => validateEmail(value!),
+                onChanged: (value) {
+                  _email = value;
+                },
               ),
               SizedBox(height: 25),
               TextFormField(
@@ -46,6 +77,11 @@ class UserForm extends StatelessWidget {
                   prefixIcon: Icon(Icons.lock),
                   hintText: "Enter your Password",
                 ),
+                validator: (value) =>
+                    value!.isEmpty ? "Password Required" : null,
+                onChanged: (value) {
+                  _password = value;
+                },
               ),
               SizedBox(height: 35),
               Column(
@@ -65,7 +101,9 @@ class UserForm extends StatelessWidget {
                             ),
                           ),
                         ),
-                        onPressed: () {},
+                        onPressed: () {
+                          validateFormField();
+                        },
                         child: Text(
                           "Sign Up",
                           style: TextStyle(
@@ -88,7 +126,10 @@ class UserForm extends StatelessWidget {
                       SizedBox(width: 10),
                       InkWell(
                         onTap: () {
-                          Navigator.pushReplacement(context,MaterialPageRoute(builder: (context)=>LoginPage()));
+                          Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => LoginPage()));
                         },
                         child: Text(
                           "Login",

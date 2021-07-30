@@ -1,15 +1,36 @@
+import 'package:covid_19_tracker/helpers/constants/constants.dart';
 import 'package:covid_19_tracker/helpers/size_config/size_config.dart';
 import 'package:covid_19_tracker/pages/user_credentials/sign_up.dart/sign_up_page.dart';
 import 'package:flutter/material.dart';
 
 class LoginUserForm extends StatelessWidget {
   const LoginUserForm({
-    Key? key,
+    Key? key,@required this.formKey,
   }) : super(key: key);
+  final formKey ;
+
+  void validateFormField(){
+    final form = formKey.currentState;
+    if(form.validate()){
+      print("Form Valid");
+    }
+    else{
+      print("Form Invalid");
+    }
+  }
+
+  String? emailValidate(String email){
+    if(!emailPhoneValidatorRegExp.hasMatch(email)){
+      return kInvalidEmailError;
+    }else{
+      return null ;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Form(
+      key: formKey,
       child: SingleChildScrollView(
         child: Container(
           margin: const EdgeInsets.all(10.0),
@@ -33,6 +54,7 @@ class LoginUserForm extends StatelessWidget {
                   prefixIcon: Icon(Icons.email),
                   hintText: "Enter your Email",
                 ),
+                validator: (value)=> emailValidate(value!),
               ),
               SizedBox(height: 25),
               TextFormField(
@@ -40,6 +62,7 @@ class LoginUserForm extends StatelessWidget {
                   prefixIcon: Icon(Icons.lock),
                   hintText: "Enter your Password",
                 ),
+                validator: (value)=> value!.isEmpty ? kPassNullError : null,
               ),
               SizedBox(height: 35),
               Column(
@@ -59,7 +82,9 @@ class LoginUserForm extends StatelessWidget {
                             ),
                           ),
                         ),
-                        onPressed: () {},
+                        onPressed: () {
+                          validateFormField();
+                        },
                         child: Text(
                           "Login",
                           style: TextStyle(
