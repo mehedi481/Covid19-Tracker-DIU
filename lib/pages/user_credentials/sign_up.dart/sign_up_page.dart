@@ -6,15 +6,7 @@ import 'package:covid_19_tracker/helpers/size_config/size_config.dart';
 import 'package:flutter/material.dart';
 import 'components/signUp_userForm.dart';
 
-class SignUpPage extends StatefulWidget {
-  const SignUpPage({Key? key}) : super(key: key);
-
-  @override
-  _SignUpPageState createState() => _SignUpPageState();
-}
-
-class _SignUpPageState extends State<SignUpPage> {
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+class SignUpPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -61,7 +53,7 @@ class _SignUpPageState extends State<SignUpPage> {
                           color: Colors.white.withOpacity(0.3),
                         ),
                       ),
-                      child: SignUpUserForm(formKey: _formKey,),
+                      child: SignUpUserForm(),
                     ),
                   ),
                 ),

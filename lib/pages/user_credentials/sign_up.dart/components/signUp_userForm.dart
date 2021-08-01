@@ -1,21 +1,39 @@
 import 'package:covid_19_tracker/helpers/constants/constants.dart';
 import 'package:covid_19_tracker/helpers/size_config/size_config.dart';
+import 'package:covid_19_tracker/pages/home/HomePage.dart';
 import 'package:covid_19_tracker/pages/user_credentials/sign_in.dart/log_in_page.dart';
+import 'package:covid_19_tracker/services/auth.dart';
 import 'package:flutter/material.dart';
 
 //ignore: must_be_immutable
-class SignUpUserForm extends StatelessWidget {
-  SignUpUserForm({Key? key, @required this.formKey}) : super(key: key);
-  final formKey;
-  String _name = '';
-  String _password = '';
-  String _email = '';
+class SignUpUserForm extends StatefulWidget {
+  @override
+  _SignUpUserFormState createState() => _SignUpUserFormState();
+}
+
+class _SignUpUserFormState extends State<SignUpUserForm> {
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  bool isLoading = false;
+  String? name;
+  String? email;
+  String? password;
 
   void validateFormField() {
-    final form = formKey.currentState;
+    final form = _formKey.currentState;
     if (form!.validate()) {
       print("Form valid");
-      print(_name + _email + _password);
+      print("email: " + email!);
+      print("name " + name!);
+      print(password! + " password");
+      // Create User
+      Auth.createUser(name!, email!, password!);
+      setState(() {
+        isLoading = false;
+        Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(builder: (context) => HomePage()),
+            (route) => false);
+      });
     } else {
       print("Form Invalid");
     }
@@ -23,6 +41,9 @@ class SignUpUserForm extends StatelessWidget {
 
   String? validateEmail(String email) {
     if (!emailPhoneValidatorRegExp.hasMatch(email)) {
+      setState(() {
+        isLoading = false;
+      });
       return "Enter a valid email address";
     } else {
       return null;
@@ -32,7 +53,7 @@ class SignUpUserForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Form(
-      key: formKey,
+      key: _formKey,
       child: SingleChildScrollView(
         child: Container(
           margin: const EdgeInsets.all(10.0),
@@ -57,7 +78,7 @@ class SignUpUserForm extends StatelessWidget {
                 ),
                 validator: (value) => value!.isEmpty ? "Name Required" : null,
                 onChanged: (value) {
-                  _name = value;
+                  name = value;
                 },
               ),
               SizedBox(height: 25),
@@ -68,7 +89,7 @@ class SignUpUserForm extends StatelessWidget {
                 ),
                 validator: (value) => validateEmail(value!),
                 onChanged: (value) {
-                  _email = value;
+                  email = value;
                 },
               ),
               SizedBox(height: 25),
@@ -80,7 +101,7 @@ class SignUpUserForm extends StatelessWidget {
                 validator: (value) =>
                     value!.isEmpty ? "Password Required" : null,
                 onChanged: (value) {
-                  _password = value;
+                  password = value;
                 },
               ),
               SizedBox(height: 35),
@@ -89,29 +110,35 @@ class SignUpUserForm extends StatelessWidget {
                   Center(
                     child: SizedBox(
                       width: ScreenSize.width * 0.5,
-                      child: ElevatedButton(
-                        style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all<Color>(
-                            Colors.blue,
-                          ),
-                          shape:
-                              MaterialStateProperty.all<RoundedRectangleBorder>(
-                            RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10),
+                      child: isLoading == true
+                          ? Center(child: CircularProgressIndicator())
+                          : ElevatedButton(
+                              style: ButtonStyle(
+                                backgroundColor:
+                                    MaterialStateProperty.all<Color>(
+                                  Colors.blue,
+                                ),
+                                shape: MaterialStateProperty.all<
+                                    RoundedRectangleBorder>(
+                                  RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                ),
+                              ),
+                              onPressed: () {
+                                setState(() {
+                                  isLoading = true;
+                                });
+                                validateFormField();
+                              },
+                              child: Text(
+                                "Sign Up",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    letterSpacing: 1.5,
+                                    fontFamily: "roboto"),
+                              ),
                             ),
-                          ),
-                        ),
-                        onPressed: () {
-                          validateFormField();
-                        },
-                        child: Text(
-                          "Sign Up",
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              letterSpacing: 1.5,
-                              fontFamily: "roboto"),
-                        ),
-                      ),
                     ),
                   ),
                   SizedBox(height: 20),

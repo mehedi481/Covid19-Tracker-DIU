@@ -1,36 +1,52 @@
 import 'package:covid_19_tracker/helpers/constants/constants.dart';
 import 'package:covid_19_tracker/helpers/size_config/size_config.dart';
+import 'package:covid_19_tracker/pages/home/HomePage.dart';
 import 'package:covid_19_tracker/pages/user_credentials/sign_up.dart/sign_up_page.dart';
+import 'package:covid_19_tracker/services/auth.dart';
 import 'package:flutter/material.dart';
 
-class LoginUserForm extends StatelessWidget {
-  const LoginUserForm({
-    Key? key,@required this.formKey,
-  }) : super(key: key);
-  final formKey ;
+class LoginUserForm extends StatefulWidget {
+  @override
+  _LoginUserFormState createState() => _LoginUserFormState();
+}
 
-  void validateFormField(){
-    final form = formKey.currentState;
-    if(form.validate()){
+class _LoginUserFormState extends State<LoginUserForm> {
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  bool isLoading = false;
+  String? email;
+  String? password;
+  void validateFormField() {
+    final form = _formKey.currentState;
+    if (form!.validate()) {
       print("Form Valid");
-    }
-    else{
+      Auth.signInUser(email!, password!);
+      setState(() {
+        isLoading = false;
+        Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(builder: (context) => HomePage()),
+            (route) => false);
+      });
+    } else {
       print("Form Invalid");
     }
   }
 
-  String? emailValidate(String email){
-    if(!emailPhoneValidatorRegExp.hasMatch(email)){
+  String? emailValidate(String email) {
+    if (!emailPhoneValidatorRegExp.hasMatch(email)) {
+      setState(() {
+        isLoading = false;
+      });
       return kInvalidEmailError;
-    }else{
-      return null ;
+    } else {
+      return null;
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return Form(
-      key: formKey,
+      key: _formKey,
       child: SingleChildScrollView(
         child: Container(
           margin: const EdgeInsets.all(10.0),
@@ -54,7 +70,7 @@ class LoginUserForm extends StatelessWidget {
                   prefixIcon: Icon(Icons.email),
                   hintText: "Enter your Email",
                 ),
-                validator: (value)=> emailValidate(value!),
+                validator: (value) => emailValidate(value!),
               ),
               SizedBox(height: 25),
               TextFormField(
@@ -62,7 +78,7 @@ class LoginUserForm extends StatelessWidget {
                   prefixIcon: Icon(Icons.lock),
                   hintText: "Enter your Password",
                 ),
-                validator: (value)=> value!.isEmpty ? kPassNullError : null,
+                validator: (value) => value!.isEmpty ? kPassNullError : null,
               ),
               SizedBox(height: 35),
               Column(
@@ -70,30 +86,38 @@ class LoginUserForm extends StatelessWidget {
                   Center(
                     child: SizedBox(
                       width: ScreenSize.width * 0.5,
-                      child: ElevatedButton(
-                        style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all<Color>(
-                            Colors.blue,
-                          ),
-                          shape:
-                              MaterialStateProperty.all<RoundedRectangleBorder>(
-                            RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10),
+                      child: isLoading == true
+                          ? Center(
+                              child: CircularProgressIndicator(),
+                            )
+                          : ElevatedButton(
+                              style: ButtonStyle(
+                                backgroundColor:
+                                    MaterialStateProperty.all<Color>(
+                                  Colors.blue,
+                                ),
+                                shape: MaterialStateProperty.all<
+                                    RoundedRectangleBorder>(
+                                  RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                ),
+                              ),
+                              onPressed: () {
+                                setState(() {
+                                  isLoading = true;
+                                });
+                                validateFormField();
+                              },
+                              child: Text(
+                                "Login",
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  letterSpacing: 1.5,
+                                  fontFamily: "roboto",
+                                ),
+                              ),
                             ),
-                          ),
-                        ),
-                        onPressed: () {
-                          validateFormField();
-                        },
-                        child: Text(
-                          "Login",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            letterSpacing: 1.5,
-                            fontFamily: "roboto",
-                          ),
-                        ),
-                      ),
                     ),
                   ),
                   SizedBox(height: 20),
@@ -108,7 +132,10 @@ class LoginUserForm extends StatelessWidget {
                       SizedBox(width: 10),
                       InkWell(
                         onTap: () {
-                          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>SignUpPage()));
+                          Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => SignUpPage()));
                         },
                         child: Text(
                           "Register",

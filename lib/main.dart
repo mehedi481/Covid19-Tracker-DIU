@@ -3,14 +3,17 @@ import 'package:covid_19_tracker/model/allCountries_model.dart';
 import 'package:covid_19_tracker/model/bangladesh_model.dart';
 import 'package:covid_19_tracker/model/topCountries_model.dart';
 import 'package:covid_19_tracker/pages/widgets/splash_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'data/data_source.dart';
 import 'model/worldWide_model.dart';
 import 'package:connectivity/connectivity.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(MyApp());
 }
 
@@ -22,7 +25,13 @@ class MyApp extends StatelessWidget {
         //Check Connection Status
         StreamProvider<ConnectivityResult?>(
           initialData: ConnectivityResult.none,
-          create: (BuildContext context) => Connectivity().onConnectivityChanged,
+          create: (BuildContext context) =>
+              Connectivity().onConnectivityChanged,
+        ),
+        // Check user
+        StreamProvider<User?>.value(
+          value: FirebaseAuth.instance.authStateChanges(),
+          initialData: null,
         ),
         FutureProvider<BangladeshDataModel?>(
           initialData: BangladeshDataModel(),

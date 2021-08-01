@@ -2,6 +2,7 @@ import 'package:covid_19_tracker/api/api.dart';
 import 'package:covid_19_tracker/data/data_source.dart';
 import 'package:covid_19_tracker/model/bangladesh_model.dart';
 import 'package:covid_19_tracker/model/worldWide_model.dart';
+import 'package:covid_19_tracker/pages/user_credentials/welcomePage.dart';
 import 'package:covid_19_tracker/pages/widgets/aboutMe.dart';
 import 'package:covid_19_tracker/pages/widgets/all_Countries.dart';
 import 'package:covid_19_tracker/pages/widgets/bangladesh.dart';
@@ -9,6 +10,7 @@ import 'package:covid_19_tracker/pages/widgets/info_pannel.dart';
 import 'package:covid_19_tracker/pages/widgets/pie_Chart_worldwide.dart';
 import 'package:covid_19_tracker/pages/widgets/top_list.dart';
 import 'package:covid_19_tracker/pages/widgets/worldwide.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -57,6 +59,14 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+  Future<void> logOut() async {
+    await FirebaseAuth.instance.signOut();
+    Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(builder: (context) => WelcomePage()),
+        (route) => false);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -74,6 +84,11 @@ class _HomePageState extends State<HomePage> {
                 Navigator.push(context,
                     MaterialPageRoute(builder: (context) => AboutMe()));
               }),
+          IconButton(
+              onPressed: () {
+                logOut();
+              },
+              icon: Icon(Icons.logout))
         ],
       ),
       body: WillPopScope(
@@ -150,7 +165,7 @@ class _HomePageState extends State<HomePage> {
                             );
                     },
                   ),
-                 
+
                   Padding(
                     padding: const EdgeInsets.symmetric(
                       vertical: 10,

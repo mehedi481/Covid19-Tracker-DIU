@@ -11,7 +11,6 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    GlobalKey<FormState> _formKey = GlobalKey<FormState>();
     return Scaffold(
       backgroundColor: primaryBlack,
       extendBodyBehindAppBar: true,
@@ -56,7 +55,7 @@ class LoginPage extends StatelessWidget {
                           color: Colors.white.withOpacity(0.3),
                         ),
                       ),
-                      child: LoginUserForm(formKey: _formKey,),
+                      child: LoginUserForm(),
                     ),
                   ),
                 ),
