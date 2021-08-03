@@ -29,8 +29,8 @@ class MyApp extends StatelessWidget {
               Connectivity().onConnectivityChanged,
         ),
         // Check user
-        StreamProvider<User?>.value(
-          value: FirebaseAuth.instance.authStateChanges(),
+        StreamProvider<User?>(
+          create: (context) => FirebaseAuth.instance.authStateChanges(),
           initialData: null,
         ),
         FutureProvider<BangladeshDataModel?>(

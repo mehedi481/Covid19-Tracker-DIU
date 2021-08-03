@@ -55,7 +55,7 @@ class BangladeshDataModel {
     final int? oneCasePerPeople;
     final int? oneDeathPerPeople;
     final int? oneTestPerPeople;
-    final int? activePerOneMillion;
+    final double? activePerOneMillion;
     final double? recoveredPerOneMillion;
     final double? criticalPerOneMillion;
 

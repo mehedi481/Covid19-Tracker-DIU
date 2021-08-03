@@ -5,7 +5,6 @@ import 'package:covid_19_tracker/pages/user_credentials/sign_in.dart/log_in_page
 import 'package:covid_19_tracker/services/auth.dart';
 import 'package:flutter/material.dart';
 
-//ignore: must_be_immutable
 class SignUpUserForm extends StatefulWidget {
   @override
   _SignUpUserFormState createState() => _SignUpUserFormState();
@@ -26,13 +25,9 @@ class _SignUpUserFormState extends State<SignUpUserForm> {
       print("name " + name!);
       print(password! + " password");
       // Create User
-      Auth.createUser(name!, email!, password!);
+      Auth.createUser(context, name!, email!, password!);
       setState(() {
         isLoading = false;
-        Navigator.pushAndRemoveUntil(
-            context,
-            MaterialPageRoute(builder: (context) => HomePage()),
-            (route) => false);
       });
     } else {
       print("Form Invalid");
@@ -129,7 +124,8 @@ class _SignUpUserFormState extends State<SignUpUserForm> {
                                 setState(() {
                                   isLoading = true;
                                 });
-                                validateFormField();
+                                Future.delayed(Duration(milliseconds: 1000))
+                                    .whenComplete(() => validateFormField());
                               },
                               child: Text(
                                 "Sign Up",

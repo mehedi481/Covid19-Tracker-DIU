@@ -22,10 +22,8 @@ class _LoginUserFormState extends State<LoginUserForm> {
       Auth.signInUser(email!, password!);
       setState(() {
         isLoading = false;
-        Navigator.pushAndRemoveUntil(
-            context,
-            MaterialPageRoute(builder: (context) => HomePage()),
-            (route) => false);
+        Navigator.pushReplacement(
+            context, MaterialPageRoute(builder: (context) => HomePage()));
       });
     } else {
       print("Form Invalid");
@@ -71,6 +69,7 @@ class _LoginUserFormState extends State<LoginUserForm> {
                   hintText: "Enter your Email",
                 ),
                 validator: (value) => emailValidate(value!),
+                onChanged: (value) => email = value,
               ),
               SizedBox(height: 25),
               TextFormField(
@@ -79,6 +78,7 @@ class _LoginUserFormState extends State<LoginUserForm> {
                   hintText: "Enter your Password",
                 ),
                 validator: (value) => value!.isEmpty ? kPassNullError : null,
+                onChanged: (value) => password = value,
               ),
               SizedBox(height: 35),
               Column(
