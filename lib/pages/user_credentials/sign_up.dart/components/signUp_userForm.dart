@@ -26,9 +26,9 @@ class _SignUpUserFormState extends State<SignUpUserForm> {
       print(password! + " password");
       // Create User
       Auth.createUser(context, name!, email!, password!);
-      setState(() {
-        isLoading = false;
-      });
+      // setState(() {
+      //   isLoading = false;
+      // });
     } else {
       print("Form Invalid");
     }
@@ -36,9 +36,9 @@ class _SignUpUserFormState extends State<SignUpUserForm> {
 
   String? validateEmail(String email) {
     if (!emailPhoneValidatorRegExp.hasMatch(email)) {
-      setState(() {
-        isLoading = false;
-      });
+      // setState(() {
+      //   isLoading = false;
+      // });
       return "Enter a valid email address";
     } else {
       return null;
@@ -124,8 +124,13 @@ class _SignUpUserFormState extends State<SignUpUserForm> {
                                 setState(() {
                                   isLoading = true;
                                 });
-                                Future.delayed(Duration(milliseconds: 1000))
-                                    .whenComplete(() => validateFormField());
+                                validateFormField();
+                                Future.delayed(Duration(milliseconds: 1500))
+                                    .whenComplete(
+                                  () => setState(() {
+                                    isLoading = false;
+                                  }),
+                                );
                               },
                               child: Text(
                                 "Sign Up",

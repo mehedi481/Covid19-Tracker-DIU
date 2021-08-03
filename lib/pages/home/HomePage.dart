@@ -10,6 +10,7 @@ import 'package:covid_19_tracker/pages/widgets/info_pannel.dart';
 import 'package:covid_19_tracker/pages/widgets/pie_Chart_worldwide.dart';
 import 'package:covid_19_tracker/pages/widgets/top_list.dart';
 import 'package:covid_19_tracker/pages/widgets/worldwide.dart';
+import 'package:covid_19_tracker/services/auth.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -59,14 +60,6 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Future<void> logOut() async {
-    await FirebaseAuth.instance.signOut();
-    Navigator.pushAndRemoveUntil(
-        context,
-        MaterialPageRoute(builder: (context) => WelcomePage()),
-        (route) => false);
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -85,10 +78,11 @@ class _HomePageState extends State<HomePage> {
                     MaterialPageRoute(builder: (context) => AboutMe()));
               }),
           IconButton(
-              onPressed: () {
-                logOut();
-              },
-              icon: Icon(Icons.logout))
+            onPressed: () {
+              Auth.logOut(context);
+            },
+            icon: Icon(Icons.logout),
+          )
         ],
       ),
       body: WillPopScope(

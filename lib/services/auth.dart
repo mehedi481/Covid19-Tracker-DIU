@@ -1,10 +1,11 @@
 import 'dart:async';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:covid_19_tracker/pages/user_credentials/welcomePage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class Auth {
+  ///////////// Create an User ////////////////
   static createUser(
       BuildContext context, String name, String email, String password) async {
     UserCredential userCredential;
@@ -28,13 +29,12 @@ class Auth {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text("Registration Successful"),
-          duration: Duration(seconds: 2),
+          duration: Duration(milliseconds: 1500),
           backgroundColor: Colors.green,
         ),
       );
-      Future.delayed(Duration(seconds: 1)).whenComplete(() {
-        Navigator.pop(context);
-      });
+      Future.delayed(Duration(milliseconds: 1000))
+          .whenComplete(() => Navigator.pop(context));
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
         ScaffoldMessenger.of(context).hideCurrentSnackBar();
@@ -60,6 +60,7 @@ class Auth {
     }
   }
 
+  /////////// User Sign in ///////////////////
   static signInUser(String email, String password) async {
     try {
       await FirebaseAuth.instance.signInWithEmailAndPassword(
@@ -73,5 +74,14 @@ class Auth {
         print('Wrong password provided for that user.');
       }
     }
+  }
+
+  ////////////////// User logOut //////////////////
+  static Future<void> logOut(context) async {
+    await FirebaseAuth.instance.signOut();
+    Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(builder: (context) => WelcomePage()),
+        (route) => false);
   }
 }
