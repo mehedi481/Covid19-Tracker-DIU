@@ -66,6 +66,7 @@ class _SignUpUserFormState extends State<SignUpUserForm> {
               ),
               SizedBox(height: 35),
               TextFormField(
+                keyboardType: TextInputType.name,
                 decoration: InputDecoration(
                   prefixIcon: Icon(Icons.person),
                   hintText: "Enter your FullName",
@@ -77,6 +78,7 @@ class _SignUpUserFormState extends State<SignUpUserForm> {
               ),
               SizedBox(height: 25),
               TextFormField(
+                keyboardType: TextInputType.emailAddress,
                 decoration: InputDecoration(
                   prefixIcon: Icon(Icons.email),
                   hintText: "Enter your Email",
@@ -88,6 +90,7 @@ class _SignUpUserFormState extends State<SignUpUserForm> {
               ),
               SizedBox(height: 25),
               TextFormField(
+                obscureText: true,
                 decoration: InputDecoration(
                   prefixIcon: Icon(Icons.lock),
                   hintText: "Enter your Password",

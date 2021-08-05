@@ -63,6 +63,7 @@ class _LoginUserFormState extends State<LoginUserForm> {
               SizedBox(height: 35),
               SizedBox(height: 25),
               TextFormField(
+                keyboardType: TextInputType.emailAddress,
                 decoration: InputDecoration(
                   prefixIcon: Icon(Icons.email),
                   hintText: "Enter your Email",
@@ -72,6 +73,7 @@ class _LoginUserFormState extends State<LoginUserForm> {
               ),
               SizedBox(height: 25),
               TextFormField(
+                obscureText: true,
                 decoration: InputDecoration(
                   prefixIcon: Icon(Icons.lock),
                   hintText: "Enter your Password",
