@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:covid_19_tracker/pages/home/HomePage.dart';
 import 'package:covid_19_tracker/pages/user_credentials/welcomePage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -76,8 +77,9 @@ class Auth {
           backgroundColor: Colors.green,
         ),
       );
-      Future.delayed(Duration(milliseconds: 1500))
-          .whenComplete(() => Navigator.pop(context));
+      Future.delayed(Duration(milliseconds: 1500)).whenComplete(() =>
+          Navigator.pushReplacement(
+              context, MaterialPageRoute(builder: (context) => HomePage())));
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         print('No user found for that email.');
