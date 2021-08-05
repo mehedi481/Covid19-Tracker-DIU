@@ -41,6 +41,7 @@ class Auth {
         print('The password provided is too weak.');
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
+            backgroundColor: Colors.red,
             content: Text("The password provided is too weak."),
             duration: Duration(seconds: 3),
           ),
@@ -50,6 +51,7 @@ class Auth {
         ScaffoldMessenger.of(context).hideCurrentSnackBar();
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
+            backgroundColor: Colors.red,
             content: Text("The account already exists for that email."),
             duration: Duration(seconds: 3),
           ),
@@ -61,17 +63,42 @@ class Auth {
   }
 
   /////////// User Sign in ///////////////////
-  static signInUser(String email, String password) async {
+  static signInUser(BuildContext context, String email, String password) async {
     try {
       await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: email,
         password: password,
       );
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text("Login Successful"),
+          duration: Duration(milliseconds: 1500),
+          backgroundColor: Colors.green,
+        ),
+      );
+      Future.delayed(Duration(milliseconds: 1500))
+          .whenComplete(() => Navigator.pop(context));
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         print('No user found for that email.');
+        ScaffoldMessenger.of(context).hideCurrentSnackBar();
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            backgroundColor: Colors.red,
+            content: Text("No user found for that email."),
+            duration: Duration(seconds: 3),
+          ),
+        );
       } else if (e.code == 'wrong-password') {
         print('Wrong password provided for that user.');
+        ScaffoldMessenger.of(context).hideCurrentSnackBar();
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            backgroundColor: Colors.red,
+            content: Text("Wrong password provided for that user."),
+            duration: Duration(seconds: 3),
+          ),
+        );
       }
     }
   }

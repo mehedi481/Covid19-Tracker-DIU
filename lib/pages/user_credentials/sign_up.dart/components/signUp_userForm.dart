@@ -1,6 +1,5 @@
 import 'package:covid_19_tracker/helpers/constants/constants.dart';
 import 'package:covid_19_tracker/helpers/size_config/size_config.dart';
-import 'package:covid_19_tracker/pages/home/HomePage.dart';
 import 'package:covid_19_tracker/pages/user_credentials/sign_in.dart/log_in_page.dart';
 import 'package:covid_19_tracker/services/auth.dart';
 import 'package:flutter/material.dart';

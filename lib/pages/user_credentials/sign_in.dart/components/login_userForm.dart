@@ -1,6 +1,5 @@
 import 'package:covid_19_tracker/helpers/constants/constants.dart';
 import 'package:covid_19_tracker/helpers/size_config/size_config.dart';
-import 'package:covid_19_tracker/pages/home/HomePage.dart';
 import 'package:covid_19_tracker/pages/user_credentials/sign_up.dart/sign_up_page.dart';
 import 'package:covid_19_tracker/services/auth.dart';
 import 'package:flutter/material.dart';
@@ -19,12 +18,12 @@ class _LoginUserFormState extends State<LoginUserForm> {
     final form = _formKey.currentState;
     if (form!.validate()) {
       print("Form Valid");
-      Auth.signInUser(email!, password!);
-      setState(() {
-        isLoading = false;
-        Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (context) => HomePage()));
-      });
+      Auth.signInUser(context, email!, password!);
+      // setState(() {
+      //   isLoading = false;
+      //   Navigator.pushReplacement(
+      //       context, MaterialPageRoute(builder: (context) => HomePage()));
+      // });
     } else {
       print("Form Invalid");
     }
@@ -32,9 +31,9 @@ class _LoginUserFormState extends State<LoginUserForm> {
 
   String? emailValidate(String email) {
     if (!emailPhoneValidatorRegExp.hasMatch(email)) {
-      setState(() {
-        isLoading = false;
-      });
+      // setState(() {
+      //   isLoading = false;
+      // });
       return kInvalidEmailError;
     } else {
       return null;
@@ -108,6 +107,12 @@ class _LoginUserFormState extends State<LoginUserForm> {
                                   isLoading = true;
                                 });
                                 validateFormField();
+                                Future.delayed(Duration(milliseconds: 1500))
+                                    .whenComplete(
+                                  () => setState(() {
+                                    isLoading = false;
+                                  }),
+                                );
                               },
                               child: Text(
                                 "Login",

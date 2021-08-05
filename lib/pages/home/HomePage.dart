@@ -2,7 +2,6 @@ import 'package:covid_19_tracker/api/api.dart';
 import 'package:covid_19_tracker/data/data_source.dart';
 import 'package:covid_19_tracker/model/bangladesh_model.dart';
 import 'package:covid_19_tracker/model/worldWide_model.dart';
-import 'package:covid_19_tracker/pages/user_credentials/welcomePage.dart';
 import 'package:covid_19_tracker/pages/widgets/aboutMe.dart';
 import 'package:covid_19_tracker/pages/widgets/all_Countries.dart';
 import 'package:covid_19_tracker/pages/widgets/bangladesh.dart';
@@ -11,7 +10,6 @@ import 'package:covid_19_tracker/pages/widgets/pie_Chart_worldwide.dart';
 import 'package:covid_19_tracker/pages/widgets/top_list.dart';
 import 'package:covid_19_tracker/pages/widgets/worldwide.dart';
 import 'package:covid_19_tracker/services/auth.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
