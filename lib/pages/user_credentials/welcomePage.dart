@@ -113,6 +113,7 @@ class _WelcomePageState extends State<WelcomePage> {
                                   .hideCurrentSnackBar();
                               ScaffoldMessenger.of(context)
                                   .showSnackBar(SnackBar(
+                                duration: Duration(seconds: 2),
                                 content: Text(
                                   "You are Offline.Please make sure your internet Connection.",
                                   style: TextStyle(fontSize: 15),
@@ -140,6 +141,7 @@ class _WelcomePageState extends State<WelcomePage> {
                                   .hideCurrentSnackBar();
                               ScaffoldMessenger.of(context)
                                   .showSnackBar(SnackBar(
+                                duration: Duration(seconds: 2),
                                 content: Text(
                                   "You are Offline.Please make sure your internet Connection.",
                                   style: TextStyle(fontSize: 15),

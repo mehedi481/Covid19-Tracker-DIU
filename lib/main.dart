@@ -3,6 +3,7 @@ import 'package:covid_19_tracker/model/allCountries_model.dart';
 import 'package:covid_19_tracker/model/bangladesh_model.dart';
 import 'package:covid_19_tracker/model/topCountries_model.dart';
 import 'package:covid_19_tracker/pages/widgets/splash_screen.dart';
+import 'package:covid_19_tracker/services/userData.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -32,6 +33,11 @@ class MyApp extends StatelessWidget {
         StreamProvider<User?>(
           create: (context) => FirebaseAuth.instance.authStateChanges(),
           initialData: null,
+        ),
+        // UserName
+        FutureProvider<String?>(
+          create: (_) => UserData.getUserName(),
+          initialData: "No User",
         ),
         FutureProvider<BangladeshDataModel?>(
           initialData: BangladeshDataModel(),

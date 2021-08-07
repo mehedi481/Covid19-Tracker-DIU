@@ -1,3 +1,4 @@
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:covid_19_tracker/api/api.dart';
 import 'package:covid_19_tracker/data/data_source.dart';
 import 'package:covid_19_tracker/model/bangladesh_model.dart';
@@ -10,6 +11,7 @@ import 'package:covid_19_tracker/pages/widgets/pie_Chart_worldwide.dart';
 import 'package:covid_19_tracker/pages/widgets/top_list.dart';
 import 'package:covid_19_tracker/pages/widgets/worldwide.dart';
 import 'package:covid_19_tracker/services/auth.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -60,6 +62,11 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    String? userName;
+    var auth = Provider.of<User?>(context);
+    if (auth != null) {
+      userName = Provider.of<String?>(context);
+    }
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -89,6 +96,12 @@ class _HomePageState extends State<HomePage> {
           onRefresh: fetchData,
           child: ListView(
             children: [
+              // Column(
+              //   children: [
+              //     userName != null ? Text("Welcome $userName") : Text("You aren't Logged in"),
+              //     //Text(userName!),
+              //   ],
+              // ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -106,6 +119,19 @@ class _HomePageState extends State<HomePage> {
                         color: Colors.orange[800],
                       ),
                     ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: userName != null
+                        ? AnimatedTextKit(
+                            totalRepeatCount: 100,
+                            animatedTexts: [
+                              TyperAnimatedText("Hi, $userName",textStyle: TextStyle(fontSize: 18)),
+                              TyperAnimatedText(
+                                  "Welcome to Covid-19 Tracker",
+                                  textStyle: TextStyle(fontSize: 18)),
+                            ])
+                        : Center(child: Text("You aren't Logged in")),
                   ),
                   SizedBox(
                     height: 10,
