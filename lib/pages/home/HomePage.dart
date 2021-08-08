@@ -65,7 +65,9 @@ class _HomePageState extends State<HomePage> {
     String? userName;
     var auth = Provider.of<User?>(context);
     if (auth != null) {
-      userName = Provider.of<String?>(context);
+      setState(() {
+        userName = Provider.of<String?>(context);
+      });
     }
     return Scaffold(
       appBar: AppBar(
@@ -96,12 +98,6 @@ class _HomePageState extends State<HomePage> {
           onRefresh: fetchData,
           child: ListView(
             children: [
-              // Column(
-              //   children: [
-              //     userName != null ? Text("Welcome $userName") : Text("You aren't Logged in"),
-              //     //Text(userName!),
-              //   ],
-              // ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
