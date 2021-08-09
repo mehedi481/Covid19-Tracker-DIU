@@ -39,6 +39,7 @@ class MyApp extends StatelessWidget {
           create: (_) => UserData.getUserName(),
           initialData: "No User",
         ),
+        // ChangeNotifierProvider<UserData>(create: (_) => UserData()),
         FutureProvider<BangladeshDataModel?>(
           initialData: BangladeshDataModel(),
           create: (context) => API.getBangladeshData(),

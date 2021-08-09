@@ -1,9 +1,20 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 
-class UserData {
-  static Future<String?> getUserName() async {
-    String? name = "";
+class UserData with ChangeNotifier {
+  String _name = '';
+  String get name => _name;
+
+  void setName(String name) {
+    _name = name;
+    notifyListeners();
+  }
+
+  UserData() {
+    getUserName();
+  }
+  Future<void> getUserName() async {
     var uid = FirebaseAuth.instance.currentUser!.uid;
     await FirebaseFirestore.instance
         .collection("userData")
@@ -12,9 +23,8 @@ class UserData {
         .then((DocumentSnapshot documentSnapshot) {
       if (documentSnapshot.exists) {
         print("user Name is ${documentSnapshot["fullName"]}");
-        name = documentSnapshot["fullName"];
+        setName(documentSnapshot["fullName"]);
       }
     });
-    return name;
   }
 }

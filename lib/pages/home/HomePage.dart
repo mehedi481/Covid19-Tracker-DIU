@@ -62,12 +62,10 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    String? userName;
+    var userName;
     var auth = Provider.of<User?>(context);
     if (auth != null) {
-      setState(() {
-        userName = Provider.of<String?>(context);
-      });
+      userName = Provider.of<String?>(context); 
     }
     return Scaffold(
       appBar: AppBar(
@@ -122,11 +120,11 @@ class _HomePageState extends State<HomePage> {
                         ? AnimatedTextKit(
                             totalRepeatCount: 100,
                             animatedTexts: [
-                              TyperAnimatedText("Hi, $userName",textStyle: TextStyle(fontSize: 18)),
-                              TyperAnimatedText(
-                                  "Welcome to Covid-19 Tracker",
-                                  textStyle: TextStyle(fontSize: 18)),
-                            ])
+                                TyperAnimatedText("Hi, $userName",
+                                    textStyle: TextStyle(fontSize: 18)),
+                                TyperAnimatedText("Welcome to Covid-19 Tracker",
+                                    textStyle: TextStyle(fontSize: 18)),
+                              ])
                         : Center(child: Text("You aren't Logged in")),
                   ),
                   SizedBox(
