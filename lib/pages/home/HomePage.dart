@@ -2,6 +2,7 @@ import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:covid_19_tracker/api/api.dart';
 import 'package:covid_19_tracker/data/data_source.dart';
 import 'package:covid_19_tracker/model/bangladesh_model.dart';
+import 'package:covid_19_tracker/model/userData_model.dart';
 import 'package:covid_19_tracker/model/worldWide_model.dart';
 import 'package:covid_19_tracker/pages/widgets/aboutMe.dart';
 import 'package:covid_19_tracker/pages/widgets/all_Countries.dart';
@@ -65,7 +66,7 @@ class _HomePageState extends State<HomePage> {
     var userName;
     var auth = Provider.of<User?>(context);
     if (auth != null) {
-      userName = Provider.of<String?>(context); 
+      userName = Provider.of<UserModel?>(context);
     }
     return Scaffold(
       appBar: AppBar(
@@ -120,7 +121,7 @@ class _HomePageState extends State<HomePage> {
                         ? AnimatedTextKit(
                             totalRepeatCount: 100,
                             animatedTexts: [
-                                TyperAnimatedText("Hi, $userName",
+                                TyperAnimatedText("Hi, ${userName.name}",
                                     textStyle: TextStyle(fontSize: 18)),
                                 TyperAnimatedText("Welcome to Covid-19 Tracker",
                                     textStyle: TextStyle(fontSize: 18)),
