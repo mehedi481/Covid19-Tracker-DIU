@@ -1,8 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:covid_19_tracker/model/userData_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class UserData {
-  static Future<String?> getUserName() async {
+  static Future<UserModel?> getUserName() async {
     String? name = "";
     var uid = FirebaseAuth.instance.currentUser!.uid;
     await FirebaseFirestore.instance
@@ -15,6 +16,7 @@ class UserData {
         name = documentSnapshot["fullName"];
       }
     });
-    return name;
+   
+    return UserModel(name: name);
   }
 }
